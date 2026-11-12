@@ -1,13 +1,13 @@
 // ===== Goutte d'eau : elle tombe pendant le scroll, le blanc devient de l'eau qui monte =====
 const wt=document.getElementById('wt'),wc=document.getElementById('wc'),wx=wc.getContext('2d');
-let W=0,H=0;
+let W=0,H=0,waterFish=[],waterFishWidth=0,waterFishLastT=performance.now()/1000;
 const wsize=()=>{const d=Math.min(devicePixelRatio,2);W=innerWidth;H=innerHeight;wc.width=W*d;wc.height=H*d;wx.setTransform(d,0,0,d,0,0)};
 wsize();addEventListener('resize',wsize);
 const eio=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
 (function water(){
  const q=wt.getBoundingClientRect();
  if(q.bottom>0&&q.top<innerHeight){
-  const P=Math.min(1,Math.max(0,-q.top/(wt.offsetHeight-innerHeight))),T=performance.now()/1000;
+  const P=Math.min(1,Math.max(0,-q.top/(wt.offsetHeight-innerHeight))),T=performance.now()/1000,dt=Math.min(.05,T-waterFishLastT);waterFishLastT=T;
   const PI=.4,cx=W/2,Y0=H*1.04,Y1=H*.8,rr=Math.max(12,Math.min(26,W*.022)),u=Math.min(1,P/PI),s=Math.max(0,P-PI);
   const lv=P<PI?Y0+(Y1-Y0)*Math.pow(u,1.4):Y1+(-H*.25-Y1)*eio(s/(1-PI));
   const A=P>=PI?Math.min(70,H*.09)*Math.exp(-s*9):0,g=Math.max(0,(u-.7)/.3);
@@ -21,6 +21,16 @@ const eio=x=>x<.5?2*x*x:1-Math.pow(-2*x+2,2)/2;
    wx.lineTo(x,y);
   }
   wx.lineTo(W,H+6);wx.closePath();wx.fillStyle='#fff';wx.fill();
+  if(waterFishWidth!==W){waterFishWidth=W;waterFish=Array.from({length:10},(_,i)=>({kind:'f',len:28+Math.random()*16,x:(i+.5)*W/10,y:0,vx:(Math.random()<.5?-1:1)*(20+Math.random()*18),al:.72,ph:Math.random()*6.28,fx:0,fy:0,depth:.18+(i%4)*.17}))}
+  if(P>=PI){
+   for(const fish of waterFish){
+    fish.x+=fish.vx*dt;
+    if(fish.vx>0&&fish.x>W+fish.len*2)fish.x=-fish.len*2;
+    else if(fish.vx<0&&fish.x<-fish.len*2)fish.x=W+fish.len*2;
+    fish.y=lv+(H-lv)*fish.depth+Math.sin(T+fish.ph)*8;
+    creature(wx,fish,T);
+   }
+  }
   if(P<PI){ // la goutte, qui s'étire en tombant
    const yd=-H*.08+(Y1-rr+H*.08)*u*u,st=1+u*.9;
    wx.save();wx.shadowColor='rgba(255,255,255,.55)';wx.shadowBlur=22;wx.fillStyle='#fff';
