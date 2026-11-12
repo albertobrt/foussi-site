@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contact – Foussi Vision</title>
+<meta name="description" content="Parlons de votre projet : site sur mesure, vidéo, photo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&family=Schibsted+Grotesk:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+<canvas id="bg" aria-hidden="true"></canvas>
+<header class="mono"><a href="index.html">← Retour au site</a></header>
+<main>
+  <div class="mono">Contact</div>
+  <h1 id="t">Parlons de votre vision.</h1>
+  <form id="f">
+    <label><span class="mono">Votre nom</span><input name="nom" required autocomplete="name"></label>
+    <label><span class="mono">Votre email</span><input name="email" type="email" required autocomplete="email"></label>
+    <label><span class="mono">Votre projet</span><textarea name="projet" rows="6" required placeholder="Site, vidéo, photo… dites-moi tout."></textarea></label>
+    <button class="btn" type="submit">Envoyer</button>
+  </form>
+  <div class="soc mono">
+    <a href="https://www.instagram.com/foussi.fr" target="_blank" rel="noopener">Instagram</a>
+    <a href="https://www.tiktok.com/@foussi.fr" target="_blank" rel="noopener">TikTok</a>
+    <a href="mentions-legales.html" target="_blank" rel="noopener">Mentions légales</a>
+  </div>
+</main>
+<script src="js/contact.js"></script>
+</body>
+</html>
