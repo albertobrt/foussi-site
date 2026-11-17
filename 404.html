@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Page introuvable — Foussi Vision</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#000000">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/img/icone.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/css/style.css?v=4">
+  <style>
+    .perdu { min-height: 100vh; min-height: 100svh; display: grid; place-items: center; text-align: center; padding: var(--marge);
+      background: radial-gradient(120% 70% at 50% 34%, #151515 0%, #050505 55%, #000 100%); }
+    .perdu img { width: min(320px, 70vw); margin: 0 auto 40px; opacity: .9; animation: cligne 4s infinite; transform-origin: center; }
+    @keyframes cligne { 0%, 92%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.08); } }
+    .perdu .titre { font-size: clamp(2.2rem, 8vw, 4.6rem); margin-bottom: 20px; }
+    .perdu p:not(.surtitre) { color: var(--texte-2); margin: 0 auto 32px; max-width: 34ch; }
+    .perdu .actions { justify-content: center; }
+  </style>
+</head>
+<body>
+  <main class="perdu">
+    <div>
+      <img src="/img/oeil.svg" alt="" width="1010" height="598">
+      <p class="surtitre">Erreur 404</p>
+      <h1 class="titre"><span class="ligne">Hors</span><span class="ligne ligne--fine">du cadre.</span></h1>
+      <p>Cette page n’existe pas, ou plus. L’œil a eu beau chercher, rien à l’horizon.</p>
+      <div class="actions"><a class="bouton" href="/">Retour à l’accueil</a><a class="bouton bouton--contour" href="/#contact">Me contacter</a></div>
+    </div>
+  </main>
+</body>
+</html>
